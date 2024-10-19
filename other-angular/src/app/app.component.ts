@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
 @Component({
@@ -14,7 +14,8 @@ export class AppComponent {
   title = 'other-angular';
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   get fromParent(): Observable<string> {
@@ -22,7 +23,14 @@ export class AppComponent {
     const par = this.route.queryParams.pipe(
       map(p => p['fromParent']),
     )
-    par.subscribe(console.log)
     return par
+  }
+
+  changeQueryParameter() {
+    console.log("ping")
+    this.router.navigate(
+      ['/'],
+      {queryParams: {toParent: 'from-child'}}
+    )
   }
 }
