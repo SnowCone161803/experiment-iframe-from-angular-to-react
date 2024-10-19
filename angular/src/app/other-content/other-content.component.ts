@@ -1,12 +1,43 @@
-import { Component } from '@angular/core';
+
+
+import { AsyncPipe, DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { map, Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-other-content',
+  selector: 'app-root',
   standalone: true,
-  imports: [],
+  imports: [RouterOutlet, AsyncPipe],
   templateUrl: './other-content.component.html',
   styleUrl: './other-content.component.css'
 })
 export class OtherContentComponent {
+  title = 'other-angular';
 
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    @Inject(DOCUMENT) private document: Document,
+  ) {}
+
+  get fromParent(): Observable<string> {
+    return this.route.queryParams.pipe(
+      map(p => p['fromParent']),
+    )
+  }
+
+  changeQueryParameter() {
+    console.log("ping")
+    const buf = new ArrayBuffer(1);
+    const mess: WindowPostMessageOptions = {
+      transfer: [buf],
+    }
+    // const event = new Event("child-event", {})
+    // this.document.defaultView?.postMessage(event)
+    // this.document.defaultView?.postMessage(
+    //   "from-child", "http://localhost:4201", [buf])
+    this.document.defaultView?.postMessage("from-child")
+  }
 }
+
