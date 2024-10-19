@@ -1,5 +1,5 @@
-import { AsyncPipe, DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -17,12 +17,6 @@ export class LocalIframeComponentComponent {
   currentUrl: string = "<unknown>";
   messageFromChild = new BehaviorSubject<string>("<none>")
   idFromChild = new BehaviorSubject<string>("<none>")
-
-
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-  ) {}
-
 
   iframeReady() {
     const source = this.iframeRef.nativeElement
