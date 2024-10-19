@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OtherContentComponent } from './other-content.component';
+import { OtherContentComponent } from './child-content.component';
 
 describe('OtherContentComponent', () => {
   let component: OtherContentComponent;

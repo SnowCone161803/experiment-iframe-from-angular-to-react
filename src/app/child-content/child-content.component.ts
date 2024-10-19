@@ -8,10 +8,10 @@ import { WindowRef } from '../window-ref';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, AsyncPipe],
-  templateUrl: './other-content.component.html',
-  styleUrl: './other-content.component.css'
+  templateUrl: './child-content.component.html',
+  styleUrl: './child-content.component.css'
 })
-export class OtherContentComponent implements OnInit {
+export class ChildContentComponent implements OnInit {
   title = 'other-angular';
 
   messageFromParent = new BehaviorSubject<string>("<none>")
