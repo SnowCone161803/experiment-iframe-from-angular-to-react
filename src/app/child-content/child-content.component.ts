@@ -15,6 +15,7 @@ export class ChildContentComponent implements OnInit {
   title = 'other-angular';
 
   messageFromParent = new BehaviorSubject<string>("<none>")
+  count: number = 0
 
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +24,7 @@ export class ChildContentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.window.nativeWindow.addEventListener("message", (event: MessageEvent) => {
+    this.window.nativeWindow.addEventListener("message", async (event: MessageEvent) => {
       if (event.data.target !== 'child') {
         return
       }
@@ -38,12 +39,13 @@ export class ChildContentComponent implements OnInit {
   }
 
   postMessageToParent() {
-    console.log("ping")
     this.document.defaultView?.postMessage({
       summary: "message from child",
       someId: "id-from-child-1234",
       target: "parent",
+      count: this.count,
     })
+    ++this.count
   }
 }
 

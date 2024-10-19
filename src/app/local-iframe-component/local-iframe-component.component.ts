@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -17,6 +17,7 @@ export class LocalIframeComponentComponent {
   currentUrl: string = "<unknown>";
   messageFromChild = new BehaviorSubject<string>("<none>")
   idFromChild = new BehaviorSubject<string>("<none>")
+  count: number = 0
 
   iframeReady() {
     const source = this.iframeRef.nativeElement
@@ -24,20 +25,21 @@ export class LocalIframeComponentComponent {
     this.currentUrl = this.iframeRef.nativeElement.src
 
     const contentWindow = this.iframeRef.nativeElement.contentWindow
-    contentWindow.addEventListener("message", (event: MessageEvent) => {
+    contentWindow.addEventListener("message", async (event: MessageEvent) => {
       if (event.data.target !== 'parent') {
         return
       }
-      this.messageFromChild.next(event.data.summary)
-      this.idFromChild.next(event.data.someId)
+      this.messageFromChild.next(JSON.stringify(event.data))
     })
   }
 
   postMessageToChild() {
     this.iframeRef.nativeElement.contentWindow.postMessage({
       from:'parent',
-      message: 'from parent',
+      message: 'from parent ',
       target: 'child',
+      count: this.count,
     })
+    ++this.count
   }
 }
