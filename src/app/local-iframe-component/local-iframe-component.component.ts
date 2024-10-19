@@ -29,7 +29,9 @@ export class LocalIframeComponentComponent {
       if (event.data.target !== 'parent') {
         return
       }
-      this.messageFromChild.next(JSON.stringify(event.data))
+      const data = JSON.stringify(event.data, null, 2)
+      console.log("message received by parent", data)
+      this.messageFromChild.next(data)
     })
   }
 

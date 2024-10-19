@@ -28,7 +28,9 @@ export class ChildContentComponent implements OnInit {
       if (event.data.target !== 'child') {
         return
       }
-      this.messageFromParent.next(JSON.stringify(event.data))
+      const data = JSON.stringify(event.data, null, 2)
+      console.log("message received by child", data)
+      this.messageFromParent.next(data)
     })
   }
 

@@ -9,6 +9,8 @@
 </iframe>
 
 <div>URL on IFrame: {{currentUrl}}</div>
-<div>message from child: {{messageFromChild | async}}</div>
+
+<div>message from child:</div>
+<div><code>{{messageFromChild | async}}</code></div>
 
 <button (click)="postMessageToChild()">Post message to child</button>
