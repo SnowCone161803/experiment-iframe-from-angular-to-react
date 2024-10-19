@@ -1,4 +1,9 @@
 iframe {
   border: 0px;
+  height: 80vh;
   width: 100%; /* takes precedence over the width set with the HTML width attribute */
+}
+
+.long-url {
+  overflow: hidden;
 }
