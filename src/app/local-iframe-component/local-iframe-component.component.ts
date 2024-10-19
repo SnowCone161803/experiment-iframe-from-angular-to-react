@@ -25,20 +25,19 @@ export class LocalIframeComponentComponent {
 
     const contentWindow = this.iframeRef.nativeElement.contentWindow
     contentWindow.addEventListener("message", (event: MessageEvent) => {
+      if (event.data.target !== 'parent') {
+        return
+      }
       this.messageFromChild.next(event.data.summary)
       this.idFromChild.next(event.data.someId)
     })
   }
 
-  @HostListener('message', ['$event'])
-  messageReceivedViaHostListener(event: MessageEvent) {
-    console.log("message received from HostListener")
-  }
-
   postMessageToChild() {
-    this.iframeRef.nativeElement.contentWindow.postMessage(
-      {from:'parent', message: 'from parent'},
-      "*",
-    )
+    this.iframeRef.nativeElement.contentWindow.postMessage({
+      from:'parent',
+      message: 'from parent',
+      target: 'child',
+    })
   }
 }

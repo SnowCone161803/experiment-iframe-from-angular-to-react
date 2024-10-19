@@ -1,7 +1,7 @@
 import { AsyncPipe, DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { WindowRef } from '../window-ref';
 
 @Component({
@@ -14,6 +14,8 @@ import { WindowRef } from '../window-ref';
 export class OtherContentComponent implements OnInit {
   title = 'other-angular';
 
+  messageFromParent = new BehaviorSubject<string>("<none>")
+
   constructor(
     private route: ActivatedRoute,
     @Inject(DOCUMENT) private document: Document,
@@ -21,10 +23,11 @@ export class OtherContentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.document.addEventListener("message", (event: Event) => {
-      console.log("event in child", event)
-      // this.messageFromChild.next(event.data.summary)
-      // this.idFromChild.next(event.data.someId)
+    this.window.nativeWindow.addEventListener("message", (event: MessageEvent) => {
+      if (event.data.target !== 'child') {
+        return
+      }
+      this.messageFromParent.next(JSON.stringify(event.data))
     })
   }
 
@@ -39,6 +42,7 @@ export class OtherContentComponent implements OnInit {
     this.document.defaultView?.postMessage({
       summary: "message from child",
       someId: "id-from-child-1234",
+      target: "parent",
     })
   }
 }
