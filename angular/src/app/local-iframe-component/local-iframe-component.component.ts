@@ -1,27 +1,38 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AsyncPipe, DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-local-iframe-component',
   standalone: true,
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './local-iframe-component.component.html',
   styleUrl: './local-iframe-component.component.css'
 })
-export class LocalIframeComponentComponent implements OnInit {
+export class LocalIframeComponentComponent {
 
   @ViewChild('iframeref')
   iframeRef: any
 
   currentUrl: string = "<unknown>";
+  messageFromChild = new BehaviorSubject<string>("<none>")
+  idFromChild = new BehaviorSubject<string>("<none>")
 
-  async ngOnInit() {
-    await new Promise( resolve => setTimeout(resolve, 1000) );
+
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+  ) {}
+
+
+  iframeReady() {
     const source = this.iframeRef.nativeElement
-    console.log(`iframeref src:`, source)
+    console.log("iframe source", source)
     this.currentUrl = this.iframeRef.nativeElement.src
 
     const contentWindow = this.iframeRef.nativeElement.contentWindow
-    contentWindow.addEventListener("from-child", () => {console.log("made it!")})
-    console.log("content window of iframe", contentWindow)
+    contentWindow.addEventListener("message", (event: MessageEvent) => {
+      this.messageFromChild.next(event.data.summary)
+      this.idFromChild.next(event.data.someId)
+    })
   }
 }

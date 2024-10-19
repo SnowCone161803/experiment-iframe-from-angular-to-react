@@ -1,5 +1,6 @@
 import { AsyncPipe, DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { map, Observable } from 'rxjs';
 

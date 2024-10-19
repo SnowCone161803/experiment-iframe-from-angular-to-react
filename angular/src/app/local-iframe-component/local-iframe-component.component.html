@@ -1,11 +1,13 @@
 <iframe
   #iframeref
   id="other-content"
-  title="Inline Frame Example"
   height="100%"
   width="100%"
   scrolling="no"
-  src="http://localhost:4200/other-content?fromParent=fromParent">
+  src="http://localhost:4200/other-content?fromParent=fromParent"
+  (load)="iframeReady()">
 </iframe>
 
 <div>URL on IFrame: {{currentUrl}}</div>
+<div>message from child: {{messageFromChild | async}}</div>
+<div>id from child: {{idFromChild | async}}</div>

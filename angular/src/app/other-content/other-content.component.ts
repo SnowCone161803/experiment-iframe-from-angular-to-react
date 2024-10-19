@@ -1,8 +1,6 @@
-
-
 import { AsyncPipe, DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { Component, Inject } from '@angular/core';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
 @Component({
@@ -17,7 +15,6 @@ export class OtherContentComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     @Inject(DOCUMENT) private document: Document,
   ) {}
 
@@ -30,14 +27,10 @@ export class OtherContentComponent {
   changeQueryParameter() {
     console.log("ping")
     const buf = new ArrayBuffer(1);
-    const mess: WindowPostMessageOptions = {
-      transfer: [buf],
-    }
-    // const event = new Event("child-event", {})
-    // this.document.defaultView?.postMessage(event)
-    // this.document.defaultView?.postMessage(
-    //   "from-child", "http://localhost:4201", [buf])
-    this.document.defaultView?.postMessage("from-child")
+    this.document.defaultView?.postMessage({
+      summary: "message from child",
+      someId: "id-from-child-1234",
+    })
   }
 }
 
