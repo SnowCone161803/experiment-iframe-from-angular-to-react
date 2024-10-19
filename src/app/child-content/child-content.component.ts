@@ -1,5 +1,5 @@
-import { AsyncPipe, DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { WindowRef } from '../window-ref';
@@ -19,7 +19,6 @@ export class ChildContentComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    @Inject(DOCUMENT) private document: Document,
     private window: WindowRef,
   ) {}
 
@@ -41,7 +40,7 @@ export class ChildContentComponent implements OnInit {
   }
 
   postMessageToParent() {
-    this.document.defaultView?.postMessage({
+    this.window.nativeWindow.postMessage({
       summary: "message from child",
       someId: "id-from-child-1234",
       target: "parent",
