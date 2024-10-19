@@ -112,11 +112,6 @@
   }
 </style>
 
-<main class="main">
-  <div class="content">
-    <app-iframe-google-map></app-iframe-google-map>
-  </div>
-</main>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
@@ -127,4 +122,13 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-<router-outlet />
+<div>
+  <ul>
+    <li><a routerLink="google-map">Google map IFrame</a></li>
+  </ul>
+  <main class="main">
+    <div class="content">
+      <router-outlet />
+    </div>
+  </main>
+</div>
