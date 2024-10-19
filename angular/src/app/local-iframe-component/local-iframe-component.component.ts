@@ -19,5 +19,9 @@ export class LocalIframeComponentComponent implements OnInit {
     const source = this.iframeRef.nativeElement
     console.log(`iframeref src:`, source)
     this.currentUrl = this.iframeRef.nativeElement.src
+
+    const contentWindow = this.iframeRef.nativeElement.contentWindow
+    contentWindow.addEventListener("from-child", () => {console.log("made it!")})
+    console.log("content window of iframe", contentWindow)
   }
 }

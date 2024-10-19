@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { map, Observable } from 'rxjs';
@@ -16,21 +16,25 @@ export class AppComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    @Inject(DOCUMENT) private document: Document,
   ) {}
 
   get fromParent(): Observable<string> {
-    this.route.queryParams.subscribe(console.log)
-    const par = this.route.queryParams.pipe(
+    return this.route.queryParams.pipe(
       map(p => p['fromParent']),
     )
-    return par
   }
 
   changeQueryParameter() {
     console.log("ping")
-    this.router.navigate(
-      ['/'],
-      {queryParams: {toParent: 'from-child'}}
-    )
+    const buf = new ArrayBuffer(1);
+    const mess: WindowPostMessageOptions = {
+      transfer: [buf],
+    }
+    // const event = new Event("child-event", {})
+    // this.document.defaultView?.postMessage(event)
+    // this.document.defaultView?.postMessage(
+    //   "from-child", "http://localhost:4201", [buf])
+    this.document.defaultView?.postMessage("from-child")
   }
 }
