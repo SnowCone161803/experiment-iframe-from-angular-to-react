@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -28,5 +28,17 @@ export class LocalIframeComponentComponent {
       this.messageFromChild.next(event.data.summary)
       this.idFromChild.next(event.data.someId)
     })
+  }
+
+  @HostListener('message', ['$event'])
+  messageReceivedViaHostListener(event: MessageEvent) {
+    console.log("message received from HostListener")
+  }
+
+  postMessageToChild() {
+    this.iframeRef.nativeElement.contentWindow.postMessage(
+      {from:'parent', message: 'from parent'},
+      "*",
+    )
   }
 }

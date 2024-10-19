@@ -11,3 +11,5 @@
 <div>URL on IFrame: {{currentUrl}}</div>
 <div>message from child: {{messageFromChild | async}}</div>
 <div>id from child: {{idFromChild | async}}</div>
+
+<button (click)="postMessageToChild()">Post message to child</button>
