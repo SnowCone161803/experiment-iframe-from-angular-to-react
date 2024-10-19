@@ -24,7 +24,7 @@ export class OtherContentComponent {
     )
   }
 
-  changeQueryParameter() {
+  postMessageToParent() {
     console.log("ping")
     const buf = new ArrayBuffer(1);
     this.document.defaultView?.postMessage({
