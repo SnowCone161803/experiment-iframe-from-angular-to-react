@@ -18,11 +18,14 @@ export function PostMessageToParent() {
 
   const [messageId, setMessageId] = react.useState()
 
-  react.useEffect(() => everySecond(postMessageToParent, setMessageId))
+  function doPost() {
+    postMessageToParent().then(setMessageId)
+  }
 
   return (
     <div>
       <h2>Post message to parent</h2>
+      <button onClick={doPost}>post to parent</button>
       <div>Message ID = {messageId}</div>
     </div>
   )

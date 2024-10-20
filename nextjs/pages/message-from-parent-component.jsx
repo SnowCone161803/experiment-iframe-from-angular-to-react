@@ -20,7 +20,7 @@ export function MessageFromParent() {
 
   function onReceiveMessage(event) {
     const data = JSON.parse(event.data)
-    if (data.target === 'child') {
+    if (data.target !== 'child') {
       return
     }
     setMessage(event.data)

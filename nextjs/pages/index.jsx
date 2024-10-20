@@ -7,11 +7,11 @@ import { MessageFromParent } from './message-from-parent-component';
 export default function Home() {
   return (
     <div>
-      <BasicsComponent></BasicsComponent>
+      {/* <BasicsComponent></BasicsComponent> */}
       <MessageFromParent></MessageFromParent>
       <PostMessageToParent></PostMessageToParent>
-      <Counter></Counter>
-      <PassInFunction></PassInFunction>
+      {/* <Counter></Counter> */}
+      {/* <PassInFunction></PassInFunction> */}
     </div>
 )
 }
