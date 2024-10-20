@@ -41,7 +41,8 @@ export default function MessageFromParent() {
   return (
     <div>
       <h2>Message from parent window</h2>
-      <div>Message: {message}</div>
+      <div>Message (structure created by me):</div>
+      <div>{message}</div>
     </div>
   )
 }
