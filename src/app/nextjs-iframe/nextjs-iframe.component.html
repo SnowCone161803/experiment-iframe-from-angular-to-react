@@ -1,1 +1,17 @@
-<p>nextjs-iframe works!</p>
+<iframe
+  #iframeref
+  id="other-content"
+  height="100%"
+  width="100%"
+  scrolling="no"
+  src="/angular/child-content?fromParent=fromParent"
+  (load)="iframeReady()">
+</iframe>
+
+<div>URL on IFrame: {{currentUrl}}</div>
+
+<div>message from child:</div>
+<div><code>{{messageFromChild | async}}</code></div>
+
+<button (click)="postMessageToChild()">Post message to child</button>
+
