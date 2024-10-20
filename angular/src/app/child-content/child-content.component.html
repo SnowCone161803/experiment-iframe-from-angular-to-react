@@ -1,5 +1,6 @@
 <div class="child-content">
   <div>Parent value from query parameters: {{fromParent | async}}</div>
   <button (click)="postMessageToParent()">Ping to parent</button>
+  <div>Message from parent (structure created by me)</div>
   <div><code>{{messageFromParent | async}}</code></div>
 </div>
