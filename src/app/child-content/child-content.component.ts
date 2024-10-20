@@ -40,12 +40,12 @@ export class ChildContentComponent implements OnInit {
   }
 
   postMessageToParent() {
-    this.window.nativeWindow.postMessage({
+    this.window.nativeWindow.postMessage(JSON.stringify({
       summary: "message from child",
       someId: "id-from-child-1234",
       target: "parent",
       count: this.count,
-    })
+    }))
     ++this.count
   }
 }

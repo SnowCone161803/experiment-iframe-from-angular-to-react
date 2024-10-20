@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "baseHref": "/angular/",
             "outputPath": "dist/angular",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -57,6 +58,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "servePath": "/angular"
+          },
           "configurations": {
             "production": {
               "buildTarget": "angular:build:production"
@@ -92,5 +96,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

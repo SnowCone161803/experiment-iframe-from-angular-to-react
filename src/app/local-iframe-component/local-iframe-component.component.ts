@@ -26,12 +26,15 @@ export class LocalIframeComponentComponent {
 
     const contentWindow = this.iframeRef.nativeElement.contentWindow
     contentWindow.addEventListener("message", async (event: MessageEvent) => {
-      if (event.data.target !== 'parent') {
+      let data = event.data
+      if (typeof(event.data) === 'string') {
+        data = JSON.parse(event.data)
+      }
+      if (data.target !== 'parent') {
         return
       }
-      const data = JSON.stringify(event.data, null, 2)
       console.log("message received by parent", data)
-      this.messageFromChild.next(data)
+      this.messageFromChild.next(JSON.stringify(data))
     })
   }
 
