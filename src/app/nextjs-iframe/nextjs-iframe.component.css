@@ -1,0 +1,5 @@
+iframe {
+  border: 0px;
+  width: 100%; /* takes precedence over the width set with the HTML width attribute */
+  height: 80vh;
+}
