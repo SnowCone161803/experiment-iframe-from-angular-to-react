@@ -3,10 +3,12 @@ import { IframeGoogleMapComponent } from './iframe-google-map/iframe-google-map.
 import { LocalIframeComponentComponent } from './local-iframe-component/local-iframe-component.component';
 import { ViewChooserComponent } from './view-chooser/view-chooser.component';
 import { ChildContentComponent } from './child-content/child-content.component';
+import { NextjsIframeComponent } from './nextjs-iframe/nextjs-iframe.component';
 
 export const routes: Routes = [
   {path: '',  component: ViewChooserComponent },
   {path: 'google-map',  component: IframeGoogleMapComponent },
   {path: 'local-iframe',  component: LocalIframeComponentComponent },
   {path: 'child-content',  component: ChildContentComponent },
+  {path: 'nextjs-iframe',  component: NextjsIframeComponent },
 ];
