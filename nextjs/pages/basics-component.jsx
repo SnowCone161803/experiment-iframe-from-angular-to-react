@@ -36,7 +36,10 @@ export function BasicsComponent() {
   }
 
   function onReceiveMessage(event) {
-    // console.log(event)
+    const data = JSON.parse(event.data)
+    if (data.target === 'parent') {
+      return
+    }
     setMessage(event.data)
   }
 
