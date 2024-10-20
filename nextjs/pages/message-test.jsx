@@ -3,7 +3,13 @@ import MessageFromParent from "./message-from-parent-component"
 
 export default function SendReceiveMessage() {
   return (
-    <div>
+    <div className="test-stuff">
+      <style jsx>{`
+        .test-stuff {
+          background-color: #eee;
+          height: 100vh;
+        }
+      `}</style>
       <PostMessageToParent></PostMessageToParent>
       <MessageFromParent></MessageFromParent>
     </div>
