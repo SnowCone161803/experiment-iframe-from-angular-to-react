@@ -39,12 +39,12 @@ export class NextjsIframeComponent {
   }
 
   postMessageToChild() {
-    this.iframeRef.nativeElement.contentWindow.postMessage({
+    this.iframeRef.nativeElement.contentWindow.postMessage(JSON.stringify({
       from:'parent',
       message: 'from parent ',
       target: 'child',
       count: this.count,
-    })
+    }))
     ++this.count
   }
 }
