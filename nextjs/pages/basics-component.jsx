@@ -21,7 +21,7 @@ async function fakePostRequest() {
 }
 
 
-export function BasicsComponent() {
+export default function BasicsComponent() {
   const [count, setCount] = React.useState(0)
   const [message, setMessage] = React.useState()
   const [config, setConfig] = React.useState()

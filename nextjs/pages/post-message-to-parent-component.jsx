@@ -14,7 +14,7 @@ async function postMessageToParent() {
     return postMessageId
 }
 
-export function PostMessageToParent() {
+export default function PostMessageToParent() {
 
   const [messageId, setMessageId] = react.useState()
 
